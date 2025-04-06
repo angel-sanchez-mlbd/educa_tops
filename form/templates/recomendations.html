@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recomendaciones</title>
+</head>
+<style>
+    .input_user {
+        display: none;
+    }
+</style>
+<body>
+    {% for course in courses %}
+        <div>
+            <h4>Curso {{ course["curso_id"] }}</h4>
+            <h5>Valorado en {{ "%.2f"|format(course["rating"]) }} por {{ course["num_interactions"] }} usuarios.</h5>
+        </div>
+    {% endfor %}
+  <form class="user_form" action="/student" method="POST">
+    <input type="text" class="input_user" name="input_user" value="{{ user_id }}">
+    <input class="input_submit" type="submit" value="Volver"></input>
+  </form>
+</body>
+</html>

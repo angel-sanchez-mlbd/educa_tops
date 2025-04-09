@@ -8,14 +8,33 @@
     .input_user {
         display: none;
     }
+    #table_courses th,
+    #table_courses td {
+        text-align: center;
+    }
 </style>
 <body>
-    {% for course in courses %}
-        <div>
-            <h4>Curso {{ course["curso_id"] }}</h4>
-            <h5>Valorado en {{ "%.2f"|format(course["rating"]) }} por {{ course["num_interactions"] }} usuarios.</h5>
-        </div>
-    {% endfor %}
+    <h2>Recomendaciones basadas en tus cursos actuales</h2>
+    <table id="table_courses">
+        <tr>
+            <th>ID del curso</th>
+            <th>Categoría</th>
+            <th>Área de interés</th>
+            <th>Dificultad</th>
+            <th>Duración (horas)</th>
+            <th>Tu valoración</th>
+        </tr>
+        {% for course in courses %}
+        <tr>
+            <td>{{ course["curso_id"] }}</td>
+            <td>{{ course["categoria"] }}</td>
+            <td>{{ course["area_interes"] }}</td>
+            <td>{{ course["dificultad"] }}</td>
+            <td>{{ course["duracion_horas"] }}</td>
+            <td>{{ "%.2f"|format(course["rating"]) }}</td>
+        </tr>
+        {% endfor %}
+    </table>
   <form class="user_form" action="/student" method="POST">
     <input type="text" class="input_user" name="input_user" value="{{ user_id }}">
     <input class="input_submit" type="submit" value="Volver"></input>

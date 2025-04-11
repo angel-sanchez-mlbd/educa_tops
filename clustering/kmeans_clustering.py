@@ -1,10 +1,7 @@
-import pandas as pd
 from sklearn.cluster import KMeans
-from sklearn.metrics import silhouette_score
 from kneed import KneeLocator
 from matplotlib import pyplot as plt
 from sklearn.preprocessing import StandardScaler
-
 
 class KmeansClustering:
 
@@ -41,7 +38,7 @@ class KmeansClustering:
         df_student_course_scaled = scaler.fit_transform(df_student_course_anonymized) # Transformar datos para poder operar con ellos
 
         k_optimum = self.k_optimum(df_student_course_scaled) # Calcular k_optimo
-        kmeans = KMeans(n_clusters=k_optimum, random_state=42, n_init=100) # Configurar KMeans con 100 repeticiones en base al k_optimo
+        kmeans = KMeans(n_clusters=k_optimum, random_state=42,  max_iter=100, init='k-means++') # Configurar KMeans con 100 repeticiones en base al k_optimo
         df_student_course_normalized['segmento'] = kmeans.fit_predict(df_student_course_anonymized) # Clusterizar alumnos_cursos en segmentos
 
         return df_student_course_normalized

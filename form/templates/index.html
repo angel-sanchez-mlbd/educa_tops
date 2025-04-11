@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+
+    <style>
+
+        .user_form {
+            display: inline;
+        }
+
+        .input_submit {
+            margin: 0.2rem;
+        }
+
+        .input_user {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+<h2>Bienvenid@ a EducaTops</h2>
+<h4>Selecciona el usuario con el que deseas iniciar sesión: </h4>
+  {% for user in users %}
+      <form class="user_form" action="/student" method="POST">
+        <input type="text" class="input_user" name="input_user" value="{{ user }}">
+        <input class="input_submit" type="submit" value="{{ user }}"></input>
+      </form>
+  {% endfor %}
+<br/><br/>
+<button>
+    <a href="/stats">Ver progreso medio por áreas de interés</a>
+</button>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student dashboard</title>
+
+    <style>
+
+        .user_form {
+            display: inline;
+        }
+
+        .input_submit {
+            margin: 0.2rem;
+        }
+
+        .input_user {
+            display: none;
+        }
+        #table_courses th,
+        #table_courses td {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <h2>Bienvenid@, {{ user["nombre"] }}</h2>
+    <h4>Tu área de interés es {{ user["area_interes"] }}</h4>
+    <h2>Cursos actuales: </h2>
+    <table id="table_courses">
+        <tr>
+            <th>ID del curso</th>
+            <th>Categoría</th>
+            <th>Área de interés</th>
+            <th>Dificultad</th>
+            <th>Duración (horas)</th>
+            <th>Tu valoración</th>
+            <th>Tu progreso actual</th>
+        </tr>
+        {% for course in student_courses %}
+        <tr>
+            <td>{{ course["curso_id"] }}</td>
+            <td>{{ course["categoria"] }}</td>
+            <td>{{ course["area_interes"] }}</td>
+            <td>{{ course["dificultad"] }}</td>
+            <td>{{ course["duracion_horas"] }}</td>
+            <td>{{ course["rating"] }}</td>
+            <td>{{ course["progress"] }}%</td>
+        </tr>
+            {% endfor %}
+    </table>
+
+    <h1>Gráfico de progreso medio</h1>
+    <img src="data:image/png;base64,{{ student_progress }}" alt="Progress graph">
+
+    <form class="user_form" action="/recomendations" method="POST">
+        <input type="text" class="input_user" name="input_user" value="{{ user.user_id }}">
+        <input class="input_submit" type="submit" value="Ver recomendaciones"></input>
+    </form>
+    <button>
+        <a href="/">Volver</a>
+    </button>
+</body>
+</html>
